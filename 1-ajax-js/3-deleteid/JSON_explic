@@ -1,0 +1,47 @@
+PHP
+
+$tableau=array(
+    'nom' => 'leclercq'
+    'prenom' => 'frederic'
+
+
+echo json_encode($tableau);         -> cf. Inspecteur / Network
+
+
+
+Inspecteur / Network => 
+
+{,…}
+liste_a_jour : "<select name="personne" id="personne">
+<option value="350">Jean-pierre</option>
+<option value="388">Clement</option>
+....
+....
+....
+value="991">adeline</option></select>"
+
+-----------------------------------------------------------
+
+JSON => { 'nom' : 'clere' , 'prenom' : 'adeline' }
+
+-----------------------------------------------------------
+
+JSON
+reception = JSON.parse(responseText);
+
+reception.nom <= clere
+reception.prenom <= adeline         -> cf. Inspecteur / Console 
+
+
+
+Inspecteur / Console => 
+
+{liste_a_jour: "<select name="personne" id="personne">
+<option valu…ion><option value="991">adeline</option></select>"}
+liste_a_jour: "<select name="personne" id="personne">
+<option value="350">Jean-pierre</option>
+<option value="388">Clement</option>
+....
+....
+....
+<option value="991">adeline</option></select>"__proto__: Object
