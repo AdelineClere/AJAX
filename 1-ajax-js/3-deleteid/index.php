@@ -12,18 +12,19 @@
 
         <div id="employes">
             <select id="personne" name="personne">  <!--⚠️ j'initialise mon select -->
-                <?php
+               
+               <?php
+                    require_once('init.php');
 
-                require_once('init.php');
-                $result=$pdo->query("SELECT * FROM employes");
-                //⚠️ à chq tour boucle lit résultats de la requête = tant que j'ai des employés, j'utilise fct qui génère id + val = le prénom qui s'affiche
-                while ( $employe = $result->fetch(PDO::FETCH_ASSOC) ){
-                    ?>
-                    <option value="<?= $employe['id_employes'] ?>"><?= $employe['prenom'] ?></option>
-                    <?php
-                }
-
+                    $result=$pdo->query("SELECT * FROM employes");  
+                    //⚠️ tours de boucle pour lire chq employé de la BDD et les proposer ds le select dc :
+                    while ( $employe = $result->fetch(PDO::FETCH_ASSOC) ){
+                        ?>
+                        <option value="<?= $employe['id_employes'] ?>"><?= $employe['prenom'] ?></option>
+                        <?php
+                    }
                 ?>
+
             </select>
         </div>  
         <input type="submit" value="supprimer" id="submit">

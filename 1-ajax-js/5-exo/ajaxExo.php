@@ -4,30 +4,31 @@ require_once('init.php');
 extract($_POST);
 
 
+//⚠️⚠️⚠️ pour afficher le tablo des employés ?
 if ( $action == 'affichage' ) 
 {
-    // Requete pour aller chercher tous mes employes
-    $result = $pdo->prepare("SELECT * FROM employes ORDER BY id_employes DESC");
+    //⚠️ Requete pour aller chercher tous mes employes
+    $result = $pdo->query("SELECT * FROM employes ORDER BY id_employes DESC");
 
     $tab['resultat'] = '<table border="1"><tr>';
-    // Je génère mes entêtes de col à partir des col SQL de la table
 
-    for ( $i=0 ; $i < $result->columnCount() ; $i++ ) // lire le nb de colonnes
+    //⚠️ 1ère lg tablo (Je génère mes entêtes de col à partir des col SQL de la table)
+    for ( $i=0 ; $i < $result->columnCount() ; $i++ )
     {
-        $infos_colonne = $result->getColumnMeta($i);   // va chercher noms de colonne 0 au 1er tour, col 1 au 2è etc...
-        $tab['resultat'] .= '<th>' . $infos_colonne['name'] . '</th>';  // on stock
-                // Rq. : chq entrée du tablo est un nom de col
+        $infos_colonne = $result->getColumnMeta($i);
+        $tab['resultat'] .= '<th>' . $infos_colonne['name'] . '</th>';
     }
-    $tab['resultat'] = '</tr>';
-    // Je boucle sur mes enregistrements
+    $tab['resultat'] .= '</tr>';
+
+    //⚠️ Je pacours tous les employés (Je boucle sur mes enregistrements)
     while ( $employe = $result->fetch(PDO::FETCH_ASSOC) )
     {
         $tab['resultat'] .= '<tr>';
-        for ( $i=0 ; $i < $result->columnCount() ; $i++ )  // cette 2è boucle lit la ligne de l'id demandé ds le select
+        for ( $i=0 ; $i < $result->columnCount() ; $i++ )
         {
-            $infos_colonne = $result->getColumnMeta($i); 
+            $infos_colonne = $result->getColumnMeta($i);
             $nom_colonne = $infos_colonne['name'];
-            // à chq tour de la boucle for je récup la val stockée ds la col pour l'employé choisi
+            //⚠️ à chq tour de la boucle for je récup la val stockée ds la col pour chq employé
             $tab['resultat'] .= '<td>' . $employe[$nom_colonne] . '</td>';
         }
         $tab['resultat'] .= '</tr>';
@@ -50,7 +51,5 @@ if ( $action == 'affichage' )
 if ( $action == "insert") {
 
 }
-
-
 
 echo json_encode($tab); // transmet l'objet JSON à js

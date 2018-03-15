@@ -18,13 +18,13 @@ $tab['liste_a_jour'] = '<select name="personne" id="personne">'; // début du se
 $result = $pdo->query("SELECT * FROM employes"); // comme c après DELETE, c bien une VO à jour des employés
 
 while ( $employe = $result->fetch(PDO::FETCH_ASSOC) ){
-    // je viens ajouter autant d'options que d'employés / l'entrée liste à jour est uhne grosse chaine de caractère concaténée :
+    // je viens ajouter autant d'options que d'employés / l'entrée liste à jour est une grosse chaine de caractère concaténée :
     $tab['liste_a_jour'] .= '<option value="'.$employe['id_employes'].'">'.$employe['prenom'].'</option>';
 }
 
 $tab['liste_a_jour'] .= '</select>';
 
-//⚠️⚠️4. J'envoie la réponse
+//⚠️⚠️ 4. J'envoie la réponse
 echo json_encode($tab);
 // transforme mon tablo en objet JSON (encode en JSON)
 

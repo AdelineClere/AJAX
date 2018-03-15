@@ -23,14 +23,16 @@ $result->execute( array(      // remplace bindvalue : on envoi tablo de param
 
 
 
-/* decl° marqueur d&étaillée :
+
+
+
+
+// decl° marqueur d&étaillée :
 
 $result = $pdo->prepare("INSERT INTO employes(prenom) VALUES (:prenom)");
 
 $personne = $result->fetch(PDO::FETCH_ASSOC);  
-// Une fois exécutée, ⚠️️ on associe une méthode pour rendre le résultat exploitable.
-
-echo '<pre>'; print_r($personne); echo '</pre>';     
+// Une fois exécutée, ⚠️️ on associe une méthode pour rendre le résultat exploitable
 
 $result->bindValue(':nom', 'Grand', PDO::PARAM_STR);    // ⚠️️ On associe une nvlle valeur au marqueur
 
@@ -38,6 +40,5 @@ $result->execute();   // Exécution de la requête
 
 $personne = $result->fetch(PDO::FETCH_ASSOC);
 
-echo '<pre>'; print_r($personne); echo '</pre>';     
+    echo '<pre>'; print_r($personne); echo '</pre>';     
 
-*/
