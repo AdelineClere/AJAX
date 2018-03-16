@@ -13,11 +13,17 @@ Un formul pour insérer un employé et met à jour le tablo en AJAX
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>EXO 5. Tablo employés + form. pour insérer</title>
+	<title>EXO 5. Tablo employés + form. pour insérer</title>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="ajaxExo.js"></script>
 </head>
 <body>
 
 <form action="#" method="post" id="myForm">
+
+		<input type="hidden" name="action" id="action" value="insert">	
+		<!-- Action insert devient 1 champ de mon form	-->
+
 		<fieldset>
 		<legend>Insérer un employé</legend>
 		
@@ -39,7 +45,6 @@ Un formul pour insérer un employé et met à jour le tablo en AJAX
 	
 	<div id="employes"></div>
 	
-    <script src="ajaxExo.js"></script>
 
 </body>
 </html>

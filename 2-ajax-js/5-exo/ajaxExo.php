@@ -1,10 +1,9 @@
 <?php
-
 require_once('init.php');
 extract($_POST);
 
 
-//⚠️⚠️⚠️ pour afficher le tablo des employés ?
+//⚠️⚠️⚠️ Action AFFICHAGE tablo des employés ?
 if ( $action == 'affichage' ) 
 {
     //⚠️ Requete pour aller chercher tous mes employes
@@ -30,8 +29,7 @@ if ( $action == 'affichage' )
         }
         $tab['resultat'] .= '</tr>';
        
-       
-       
+     
     /* autre méthode :  
         for ( $i=0 ; $i < $result->columnCount() ; $i++ )
         {
@@ -54,14 +52,14 @@ if ( $action == 'affichage' )
     */
 
     }
-
     $tab['resultat'] .= '</table>';
 }
    
-// :
+//⚠️⚠️⚠️ Action INSERT
+
 if ( $action == "insert") {
 
-    // je fais ma requête d'insertion en préparant maruqueurs
+    // je fais ma requête d'insertion en préparant marqueurs
     $result = $pdo->prepare("INSERT INTO employes VALUES (NULL, :prenom, :nom, :sexe, :service, :date_emb, :salaire)");
     if ( $result->execute( array(
             'prenom' => $prenom,

@@ -32,8 +32,7 @@ function affiche_employes(){
 }
 
 
-
-//⚠️ ⚠️ ⚠️  Autre méthode :
+//⚠️ ⚠️ ⚠️  
 function ajax_insert(){ // si clic btn submit je fais app à cette fct
     // appel ajax pour insérer un employe
     if (window.XMLHttpRequest) r = new XMLHttpRequest();
@@ -48,14 +47,14 @@ function ajax_insert(){ // si clic btn submit je fais app à cette fct
 
     var parameters="nom=" + nom + "&prenom=" + prenom + "&sexe=" + sexe + "&service=" + service + "&date_emb=" + date_emb + "&salaire=" + salaire + "&action=insert";
     
-    r.open("POST","ajax.php",true);
+    r.open("POST","ajaxExo.php",true);
     r.setRequestHeader("Content-type","application/x-www-form-urlencoded");
     r.send(parameters);
     r.onreadystatechange = function(){
         if ( r.readyState == 4 && r.status == 200){
             var obj = JSON.parse( r.responseText );	  
             // actions
-            if ( obj.validation = "ok" ) {
+            if ( obj.validation == "ok" ) {
                 // si insertion se passe bien, je réaffiche les employes
                 affiche_employes();
             }
