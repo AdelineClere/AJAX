@@ -3,8 +3,8 @@ $(document).ready( function () {
 
     maj();  // lancer fct 1ere fois pr aff tablo 1er nom (Rq. :⚠️ () => fct immédiate)
 
-    // Appel à cette fct maj au chgt de prs sélect :
-    $('#personne').on('change', maj);   // qd nom sélect change (⚠️ici => fct s'exécute au chgt)
+    //⚠️  Appel à cette fct maj au chgt de prs sélect :
+    $('#personne').on('change', maj);   // qd nom sélect change (⚠️ ici => fct s'exécute au chgt)
     // idem : $('#personne').on('change',function() { maj(); }); 
 
         function maj() {

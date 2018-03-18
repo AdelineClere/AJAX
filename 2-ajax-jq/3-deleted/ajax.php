@@ -12,14 +12,14 @@ $result->execute( array(
     'id_employes' => $id
 ));
 
-// Créateur d'un tableau avec un index 'liste_a_jour' qui va contenir l'intégralité de ma balise HTML select
+//⚠️  Créateur d'un tableau avec un index 'liste_a_jour' qui va contenir l'intégralité de ma balise HTML select
 $tab = array();
-$tab['liste_a_jour'] = '<select name="personne" id="personne">'; // début du select
+$tab['liste_a_jour'] = '<select name="personne" id="personne">'; //⚠️  début du select
 
-$result = $pdo->query("SELECT * FROM employes"); // comme c après DELETE, c bien une VO à jour des employés
+$result = $pdo->query("SELECT * FROM employes"); //⚠️  comme c après DELETE, c bien une VO à jour des employés
 
 while ( $employe = $result->fetch(PDO::FETCH_ASSOC) ){
-    // je viens ajouter autant d'options que d'employés / l'entrée liste à jour est une grosse chaine de caractère concaténée :
+    //⚠️ je viens ajouter autant d'options que d'employés / l'entrée liste à jour est une grosse chaine de caractère concaténée :
     $tab['liste_a_jour'] .= '<option value="'.$employe['id_employes'].'">'.$employe['prenom'].'</option>';
 }
 

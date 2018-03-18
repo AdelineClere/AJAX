@@ -24,10 +24,10 @@ $(document).ready( function () {
            $.post(destination , parametres , function(){} (appelée en cas de succès) , le format)  */
 
        
-        $.post('ajax.php', {'personne' : personne}, function(reponse) { // -> déjà parsé en json ici
+        $.post('ajax.php', {'personne' : personne}, function(reponse) { //⚠️  -> déjà parsé en json ici
            
             if (reponse.validation == 'ok') {
-                $('#resultat').append('employe '+ personne +' ajouté(e) !');  // insère ds tablo
+                $('#resultat').append('employe '+ personne +' ajouté(e) !');  //⚠️  insère ds tablo
                 $('#personne').val(""); // vide personne saisie
             }
         }, 'json'); 
