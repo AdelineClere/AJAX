@@ -27,6 +27,19 @@ if ( !isset($_SESSION['pseudo']) )
     <link rel="stylesheet" href="inc/style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="inc/ajax.js"></script>
+    <script>
+        <?php
+            $result = $pdo->query("SELECT id_dialogue FROM dialogue ORDER BY id_dialogue DESC LIMIT 0,1");
+            $info = $result->fetch(PDO::FETCH_ASSOC);
+        ?>
+        var lastid = <?= $info['id_dialogue'] ?? 0 ?> ;    // si ça existe en PHP7
+        /*
+        En mode if normal :
+            if ( isset($info['id_dialogue'])) echo $info['id_dialogue'] } else { echo '0'}
+        En mode ternaire PHP 5 :
+            echo isset($info['id_dialogue']) ? $info['id_dialogue'] : 0 (= avant '?' = Q° (est-ce que ça est vrai) 
+        */
+    </script>
 </head>
 <body>
     
@@ -34,9 +47,9 @@ if ( !isset($_SESSION['pseudo']) )
 
         <div id="message_tchat">
 
-            <h2>Connecté en tant que <?= $_SESSION['pseudo'] ?></h2>
+            <h2> Connecté en tant que <?= $_SESSION['pseudo'] ?></h2>
             <?php
-                // Jointures de tables SQL :
+                //⚠️ Jointures de tables SQL :
                 $result = $pdo->query("SELECT d.id_dialogue, m.pseudo, m.civilite, d.message, date_format(d.date, '%d/%m/%Y - %H:%i:%s') as datefr 
                 FROM dialogue d, membre m 
                 WHERE m.id_membre = d.id_membre 
@@ -62,7 +75,7 @@ if ( !isset($_SESSION['pseudo']) )
             <h2>Membre(s) connecté(s)</h2>
             <?php
             $result = $pdo->query("SELECT * FROM membre WHERE date_connexion > ". (time() - 3600)." ORDER BY pseudo");
-            // si, on a une activité sur la dernière H => aff membres 
+            //⚠️ si, on a une activité sur la dernière Heure => aff membres 
             while ($membre = $result->fetch(PDO::FETCH_ASSOC) )
             {
                 if ($membre['civilite'] == 'm') { $color = "bleu"; $civ="Homme";}
@@ -74,17 +87,24 @@ if ( !isset($_SESSION['pseudo']) )
             ?>
         </div>
 
-        <div class="clear"> <!-- pr stopper effet flottant du float left -->
-        </div>
+        <div class="clear"></div> <!--⚠️ pr stopper effet flottant du float left -->
 
         <div id="smiley">
+            <img class="smiley" src="smil/smiley1.gif" alt=":)">
+            <img class="smiley" src="smil/smiley2.gif" alt=":|">
+            <img class="smiley" src="smil/smiley3.gif" alt=":d">
+            <img class="smiley" src="smil/smiley4.gif" alt=":p">
+            <img class="smiley" src="smil/smiley5.gif" alt="{3">
+            <img class="smiley" src="smil/smiley6.gif" alt=":o">
         </div>
 
         <div id="formulaire_tchat">
-            <form method="post" action"#">
+            <form method="post" action="#">
                 <input class="textarea" type="text" id="message" name="message" maxlength="255"> 
-                <!-- car si varchar, il est limité à 255 car. en BDD -->
+                <!--⚠️ car si varchar, il est limité à 255 car. en BDD -->
                 <input type="submit" name="envoi" value="envoi" class="submit">
+            </form>
+            <button id="deconnexion" type="button"> Déconnexion </button>
         </div>
 
     </div>
